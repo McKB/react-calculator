@@ -32,7 +32,7 @@ const Content = () => {
 
     const onButtonClick = () => {
         setAnswer(doMath(input1, input2, operator))
-        if (input1 === '' || input2 === '' || isNaN(answer)) {
+        if (!input1 || !input2 || isNaN(answer)) {
             setAnswer(null)
         }  
     }
