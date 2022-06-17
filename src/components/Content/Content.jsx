@@ -9,44 +9,45 @@ const Content = () => {
     const [answer, setAnswer] = useState('0')
 
     const doMath = (num1, num2, op) => {
-        let answer = null
         switch (op) {
             case '+':
-                answer = num1 + num2
+                setAnswer(num1 + num2)
                 break
             case '-':
-                answer = num1 - num2
+                setAnswer(num1 - num2)
                 break
             case 'x':
-                answer = num1 * num2
+                setAnswer(num1 * num2)
                 break
             case '/':
-                answer = num1 / num2
+                setAnswer(num1 / num2)
                 break
             default:
-                answer = null
+                setAnswer(null)
         }
-
-        return answer
+        if (num1 === 0 && num2 === 0 && op === '/') {
+            setAnswer('Not a number')
+        }
     }
 
     const onButtonClick = () => {
-        setAnswer(doMath(input1, input2, operator))
-        if ((!input1 && input1 !== 0) || (!input2 && input2 !== 0) || isNaN(answer)) {
-            setAnswer(null)
-        }  
+        if ((input1 || input1 === 0) && (input2 || input2 === 0)) {
+            doMath(Number(input1), Number(input2), operator)
+        } else {
+            setAnswer('')
+        }
     }
 
     return (
         <>
-            <input type='text' name='input1' className='inputBox' onChange={(event) => { setInput1(Number(event.target.value)) }}/>
+            <input type='text' name='input1' className='inputBox' onChange={(event) => { setInput1(event.target.value) }}/>
             <select name='operator' onChange={(event) => { setOperator(event.target.value) }}>
                 <option>+</option>
                 <option>-</option>
                 <option>x</option>
                 <option>/</option>
             </select>
-            <input type='text' name='input2' className='inputBox' onChange={(event) => { setInput2(Number(event.target.value)) }} />
+            <input type='text' name='input2' className='inputBox' onChange={(event) => { setInput2(event.target.value) }} />
             <button name='equals' onClick={() => onButtonClick() }>=</button>
             <input type='text' name='answer' className='inputBox' value={answer || answer === 0 ? answer : ''}/>
             {answer || answer === 0 ? null : <div className='errorMessage'>Error! Please use numbers only.</div>}
