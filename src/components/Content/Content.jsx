@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import './Content.css'
 
 const Content = () => {
 
@@ -39,19 +40,19 @@ const Content = () => {
     }
 
     return (
-        <>
+        <div className='contentContainer'>
             <input type='text' name='input1' className='inputBox' onChange={(event) => { setInput1(event.target.value) }}/>
-            <select name='operator' onChange={(event) => { setOperator(event.target.value) }}>
+            <select name='operator' className='operator' onChange={(event) => { setOperator(event.target.value) }}>
                 <option>+</option>
                 <option>-</option>
                 <option>x</option>
                 <option>/</option>
             </select>
             <input type='text' name='input2' className='inputBox' onChange={(event) => { setInput2(event.target.value) }} />
-            <button name='equals' onClick={() => onButtonClick() }>=</button>
+            <button name='equals' className='equals' onClick={() => onButtonClick() }>=</button>
             <input type='text' name='answer' className='inputBox' value={answer || answer === 0 ? answer : ''}/>
             {answer || answer === 0 ? null : <div className='errorMessage'>Error! Please use numbers only.</div>}
-        </>
+        </div>
     )
 }
 
